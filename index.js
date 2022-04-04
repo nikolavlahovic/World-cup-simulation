@@ -1,7 +1,4 @@
 const main = () => {
-  function getGoals(max) {
-    return Math.floor(Math.random() * max);
-  }
 
   function Team(name, rank, flag) {
     this.name = name;
@@ -81,8 +78,12 @@ const main = () => {
   let victor = [];
   let finalMatch = [];
 
+  function getGoals(max) {            // Vraca random int
+    return Math.floor(Math.random() * max);
+  }
 
-  function getScore() {               //Racuna rezultat
+
+  function getScore() {               // Vraca rezultat
     let a = getGoals(6);
     let b = getGoals(6);
     let score = [a, b];
@@ -104,7 +105,7 @@ const main = () => {
 
 
     //For petlja za simulaciju tri kola gupne faze
-
+    // Ispisivanje svakog meca grupne faze
     let groupTableContent = `<div><h1>Grupa ${element.ID}</h1><table class="groupTable"><tr><th>#</th><th>Team A</th><th>rez</th><th>Team B</th><tr>`;
 
 
@@ -203,7 +204,7 @@ const main = () => {
   })(eliminationsGroupA, eliminationsGroupB);
 
 
-  function Eliminations(previousComp, nextComp, id) {           // Funkcija za duele(gura pobednike duela u novi niz)
+  function Eliminations(previousComp, nextComp, id) {           // Funkcija za duele (gura pobednike duela u novi niz)
 
     let eliminationChild = document.createElement('div');
     eliminationChild.setAttribute('id', id);
@@ -265,12 +266,12 @@ const main = () => {
 
   }
 
-  PairUp(quarterFinals, pairedQF);                   //Uparuje takmicare za cetvrt finale
-  Eliminations(pairedQF, semiFinals, 'Četvrtina');   //Mecevi cetvrt finala
-  PairUp(semiFinals, pairedSF);                      //uparuje takmicare za polu-finale
-  Eliminations(pairedSF, finals, 'Polovina');        //mecevi polufinala
-  finalMatch.push(finals);                           //Ubacuje takmicare finala u niz
-  Eliminations(finalMatch, victor, 'Finale');        //Finalni mec
+  PairUp(quarterFinals, pairedQF);                   // Uparuje takmicare za cetvrt finale
+  Eliminations(pairedQF, semiFinals, 'Četvrtina');   // Mecevi cetvrt finala
+  PairUp(semiFinals, pairedSF);                      // Uparuje takmicare za polu-finale
+  Eliminations(pairedSF, finals, 'Polovina');        // Mecevi polufinala
+  finalMatch.push(finals);                           // Ubacuje takmicare finala u niz
+  Eliminations(finalMatch, victor, 'Finale');        // Finalni mec
 
   //OUTPUT --------------------
 
