@@ -1,0 +1,131 @@
+html {
+    font-size: 40.5%;
+}
+
+body {
+    font-size: 10px;
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    color: #555;
+}
+
+header {
+    position: sticky;
+    top: 0;
+}
+
+#header {
+    height: 50px;
+    background-color: white;
+    width: 101%;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.322);
+
+}
+
+#header h1 {
+    margin-left: 20%;
+}
+
+#header img {
+    height: 70px;
+    background-color: white;
+    box-shadow: -2px 3px 2px rgba(0, 0, 0, 0.281);
+    border-radius: 5%;
+}
+
+#header ul li {
+    text-decoration: none;
+    display: inline;
+    margin: 20px;
+}
+
+#header ul li a {
+    font-size: 3rem;
+    text-decoration: none;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    color: #555;
+}
+
+/* TABLES */
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #E1E1E1;
+}
+
+th:first-child,
+td:first-child {
+    padding-left: 0;
+}
+
+th:last-child,
+td:last-child {
+    padding-right: 0;
+}
+
+#groupsTable {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+#groupsTable div {
+    margin: 5px;
+    padding: 5px;
+    box-shadow: 1px 1px 3px;
+}
+
+.naslov {
+    font-size: 25px;
+
+}
+
+#finalTables {
+
+    display: flex;
+    flex-wrap: wrap;
+
+
+}
+
+#finalTables div {
+    margin: 5px;
+    padding: 5px;
+    box-shadow: 1px 1px 3px;
+    width: 500px;
+}
+
+#eliminations {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#eliminations div {
+    margin: 5px;
+    padding: 5px;
+    box-shadow: 1px 1px 3px;
+}
+
+#eliminations #winner {
+    box-shadow: none;
+}
+
+#winner {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#winnerText {
+    font-size: 5rem;
+}
+
+#eliminations img {
+    width: 200px;
+    box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.322);
+
+}
