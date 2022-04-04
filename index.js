@@ -290,6 +290,8 @@ const main = () => {
     document.getElementById('finalTables').innerHTML += rankingTable;
   });
 
+
+  // Output pobednika
   let parent = document.getElementById('eliminations');
   let winner = document.createElement('div');
   winner.setAttribute('id', 'winner');
