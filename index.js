@@ -235,7 +235,7 @@ const main = () => {
           nextComp.push(pair[1]);
           printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1]}</th></tr>`;
 
-        } else if(penalties[0] == penalties[1]) {
+        } else if (penalties[0] == penalties[1]) {
           if (Math.random() > 0.5) {
             nextComp.push(pair[0]);
             printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0] + 1}:${penalties[1]}</th></tr>`;
@@ -248,7 +248,7 @@ const main = () => {
           }
         }
       }
-     
+
     });
     printTable += `</table>`;
     document.getElementById(id).innerHTML += printTable;
