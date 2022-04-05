@@ -113,7 +113,7 @@ const main = () => {
       groupTableContent += `<th>Kolo ${i + 1}</th><tr>`;
       Pairs(element).forEach(pair => {
         let score = getScore();
-        groupTableContent += `<tr><th></th><th>${pair[0].name} <th>${score[0]}:${score[1]}</th><th> ${pair[1].name}</th><tr>`;
+        groupTableContent += `<tr><td></td><td>${pair[0].name} <td>${score[0]}:${score[1]}</td><td> ${pair[1].name}</td><tr>`;
 
         if (score[0] > score[1]) {
 
@@ -220,18 +220,35 @@ const main = () => {
       let b = score[1];
       if (a > b) {
         nextComp.push(pair[0]);
+        printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr>`;
       }
-      if (a < b) {
+      else if (a < b) {
         nextComp.push(pair[1]);
+        printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr>`;
       }
-      if (a == b) {
-        if (Math.random > 0.5) {
+      else if (a == b) {
+        let penalties = getScore(6);
+        if (penalties[0] > penalties[1]) {
           nextComp.push(pair[0]);
-        } else {
+          printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1]}</th></tr>`;
+        } else if (penalties[1] > penalties[0]) {
           nextComp.push(pair[1]);
+          printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1]}</th></tr>`;
+
+        } else if(penalties[0] == penalties[1]) {
+          if (Math.random() > 0.5) {
+            nextComp.push(pair[0]);
+            printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0] + 1}:${penalties[1]}</th></tr>`;
+
+          } else {
+            nextComp.push(pair[1]);
+            printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1] + 1}</th></tr>`;
+
+
+          }
         }
       }
-      printTable += `<tr><th>${pair[0].name}</th><th>${a}:${b}</th><th>${pair[1].name}</th></tr>`;
+     
     });
     printTable += `</table>`;
     document.getElementById(id).innerHTML += printTable;
@@ -290,8 +307,6 @@ const main = () => {
     document.getElementById('finalTables').innerHTML += rankingTable;
   });
 
-
-  // Output pobednika
   let parent = document.getElementById('eliminations');
   let winner = document.createElement('div');
   winner.setAttribute('id', 'winner');
