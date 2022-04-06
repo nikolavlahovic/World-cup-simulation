@@ -1,15 +1,66 @@
 const main = () => {
 
-  function Team(name, rank, flag) {
-    this.name = name;
-    this.rank = rank;
-    this.points = 0;
-    this.goals = 0;
-    this.goalsReceived = 0;
-    this.gamesWon = 0;
-    this.gamesLost = 0;
-    this.drawGames = 0;
-    this.flag = flag;
+  class Team {
+  
+    constructor(name, rank, flag) {
+      this.name = name;
+      this.rank = rank;
+      this.flag = flag;
+    }
+    #points = 0;
+    #goals = 0;
+    #goalsReceived = 0;
+    #gamesWon = 0;
+    #gamesLost = 0;
+    #drawGames = 0;
+
+
+    addPoints(points) {
+      this.#points += points;
+    }
+    addGoals(goals) {
+      this.#goals += goals;
+    }
+    addGamesWon() {
+      this.#gamesWon += 1;
+    }
+    addGamesLost() {
+      this.#gamesLost += 1;
+    }
+    addDrawGames() {
+      this.#drawGames += 1;
+    }
+    addGoalsReceived(goals) {
+      this.#goalsReceived += goals;
+    }
+
+    getName() {
+      return this.name;
+    }
+    getRank() {
+      return this.rank;
+    }
+    getPoints() {
+      return this.#points;
+    }
+    getGoals() {
+      return this.#goals;
+    }
+    getGamesWon() {
+      return this.#gamesWon;
+    }
+    getGamesLost() {
+      return this.#gamesLost;
+    }
+    getDrawGames() {
+      return this.#drawGames;
+    }
+    getFlag() {
+      return this.flag;
+    }
+    getGoalsReceived() {
+      return this.#goalsReceived;
+    }
   }
 
 
@@ -113,34 +164,34 @@ const main = () => {
       groupTableContent += `<th>Kolo ${i + 1}</th><tr>`;
       Pairs(element).forEach(pair => {
         let score = getScore();
-        groupTableContent += `<tr><td></td><td>${pair[0].name} <td>${score[0]}:${score[1]}</td><td> ${pair[1].name}</td><tr>`;
+        groupTableContent += `<tr><td></td><td>${pair[0].getName()} <td>${score[0]}:${score[1]}</td><td> ${pair[1].getName()}</td><tr>`;
 
         if (score[0] > score[1]) {
 
-          pair[0].points += 3;
-          pair[0].gamesWon += 1;
-          pair[1].gamesLost += 1;
+          pair[0].addGoals(3);
+          pair[0].addGamesWon();
+          pair[1].addGamesLost();
 
         } else if (score[0] < score[1]) {
 
-          pair[1].points += 3;
-          pair[1].gamesWon += 1;
-          pair[0].gamesLost += 1;
+          pair[1].addPoints(3);
+          pair[1].addGamesWon();
+          pair[0].addGamesLost();
 
         } else if (score[0] == score[1]) {
 
-          pair[1].points += 1;
-          pair[0].points += 1;
-          pair[0].drawGames += 1;
-          pair[1].drawGames += 1;
+          pair[1].addPoints(1);
+          pair[0].addPoints(1);
+          pair[0].addDrawGames();
+          pair[1].addDrawGames();
 
         }
 
         //Dodavanje GOLOVA posle meca u grupnoj fazi
-        pair[0].goals += score[0];
-        pair[0].goalsReceived += score[1];
-        pair[1].goals += score[1];
-        pair[1].goalsReceived += score[0];
+        pair[0].addGoals(score[0]);
+        pair[0].addGoalsReceived(score[1]);
+        pair[1].addGoals(score[1]);
+        pair[1].addGoalsReceived(score[0]);
 
 
         //Sortiranje po broju BODOVA
@@ -220,29 +271,29 @@ const main = () => {
       let b = score[1];
       if (a > b) {
         nextComp.push(pair[0]);
-        printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr>`;
+        printTable += `<tr><td>${pair[0].getName()}</td><td>${a}:${b}</td><td>${pair[1].getName()}</td></tr>`;
       }
       else if (a < b) {
         nextComp.push(pair[1]);
-        printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr>`;
+        printTable += `<tr><td>${pair[0].getName()}</td><td>${a}:${b}</td><td>${pair[1].getName()}</td></tr>`;
       }
       else if (a == b) {
         let penalties = getScore(6);
         if (penalties[0] > penalties[1]) {
           nextComp.push(pair[0]);
-          printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1]}</th></tr>`;
+          printTable += `<tr><td>${pair[0].getName()}</td><td>${a}:${b}</td><td>${pair[1].getName()}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1]}</th></tr>`;
         } else if (penalties[1] > penalties[0]) {
           nextComp.push(pair[1]);
-          printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1]}</th></tr>`;
+          printTable += `<tr><td>${pair[0].getName()}</td><td>${a}:${b}</td><td>${pair[1].getName()}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1]}</th></tr>`;
 
         } else if (penalties[0] == penalties[1]) {
           if (Math.random() > 0.5) {
             nextComp.push(pair[0]);
-            printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0] + 1}:${penalties[1]}</th></tr>`;
+            printTable += `<tr><td>${pair[0].getName()}</td><td>${a}:${b}</td><td>${pair[1].getName()}</td></tr><tr><th>penalties</th><th>${penalties[0] + 1}:${penalties[1]}</th></tr>`;
 
           } else {
             nextComp.push(pair[1]);
-            printTable += `<tr><td>${pair[0].name}</td><td>${a}:${b}</td><td>${pair[1].name}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1] + 1}</th></tr>`;
+            printTable += `<tr><td>${pair[0].getName()}</td><td>${a}:${b}</td><td>${pair[1].getName()}</td></tr><tr><th>penalties</th><th>${penalties[0]}:${penalties[1] + 1}</th></tr>`;
 
 
           }
@@ -259,7 +310,7 @@ const main = () => {
 
   function PairUp(array, resultArray) {                    // Vraca nasumicne parove bez ponavljanja
 
-    newArray = array;
+    let newArray = array;
 
     function getSecondPair() {
       let index = Math.floor(Math.random() * newArray.length);
@@ -296,11 +347,11 @@ const main = () => {
 
     let rankingTable = `<div><h1>Grupa ${group.ID}</h1><table><tr><th>#</th><th>Tim</th><th>Rang</th><th>Pobeda</th><th>Nerešeno</th><th>Poraza</th><th>GD:GP</th><th>Poeni</th>`
     for (let i = 0; i < group.length; i++) {
-      rankingTable += `<tr><th>${i + 1}.</th><th>${group[i].name}</th>
-                        <th>${group[i].rank}</th><th>${group[i].gamesWon}</th>
-                        <th>${group[i].drawGames}</th><th>${group[i].gamesLost}</th>
-                        <th>${group[i].goals} : ${group[i].goalsReceived}</th>
-                        <th>${group[i].points}</th></tr>`
+      rankingTable += `<tr><th>${i + 1}.</th><th>${group[i].getName()}</th>
+                        <th>${group[i].getRank()}</th><th>${group[i].getGamesWon()}</th>
+                        <th>${group[i].getDrawGames()}</th><th>${group[i].getGamesLost()}</th>
+                        <th>${group[i].getGoals()} : ${group[i].getGoalsReceived()}</th>
+                        <th>${group[i].getPoints()}</th></tr>`
 
     }
     rankingTable += `</table></div>`;
@@ -312,7 +363,7 @@ const main = () => {
   winner.setAttribute('id', 'winner');
   parent.appendChild(winner);
   let parent1 = document.getElementById('eliminations');
-  winner.innerHTML = `<h1 id="winnerText">Pobednik je: ${victor[0].name} !!!</h1>
+  winner.innerHTML = `<h1 id="winnerText">Pobednik je: ${victor[0].getName()} !!!</h1>
                       <img src="https://cdn.countryflags.com/thumbs/${victor[0].flag}/flag-square-250.png"/>`;
 
 
