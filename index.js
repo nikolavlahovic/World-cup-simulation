@@ -13,7 +13,7 @@ const main = () => {
     #gamesWon = 0;
     #gamesLost = 0;
     #drawGames = 0;
-
+    
 
     addPoints(points) {
       this.#points += points;
@@ -60,6 +60,9 @@ const main = () => {
     }
     getGoalsReceived() {
       return this.#goalsReceived;
+    }
+    getGoalDiff(){
+      return this.#goals - this.#goalsReceived;
     }
   }
 
@@ -196,28 +199,28 @@ const main = () => {
 
         //Sortiranje po broju BODOVA
         element.sort((a, b) => {
-          if (a.points > b.points) {
-            return -1;
+          if (a.getPoints() > b.getPoints()) {
+            return -.1;
           }
-          if (a.points < b.points) {
+          if (a.getPoints() < b.getPoints()) {
             return 1;
           }
-          if (a.points == b.points) {
+          if (a.getPoints() == b.getPoints()) {
             //Provera po RAZLICI GOLOVA
-            if (a.goalDiff > b.goalDiff) {
+            if (a.getGoalDiff() > b.getGoalDiff()) {
               return -1;
             }
-            if (a.goalDiff < b.goalDiff) {
+            if (a.getGoalDiff() < b.getGoalDiff()) {
               return 1;
             }// Provera po BROJU GOLOVA
-            if (a.goalDiff == b.goalDiff) {
-              if (a.goals > b.goals) {
+            if (a.getGoalDiff() == b.getGoalDiff()) {
+              if (a.getGoals() > b.getGoals()) {
                 return -1;
               }
-              if (a.goals < b.goals) {
+              if (a.getGoals() < b.getGoals()) {
                 return 1;
               }
-              if (a.goals == b.goals) {
+              if (a.getGoals() == b.getGoals()) {
                 return 0;
               }
             }
